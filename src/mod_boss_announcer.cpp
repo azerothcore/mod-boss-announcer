@@ -1,6 +1,5 @@
 ﻿//by SymbolixDEV
-//Fixed Error SymbolixDEV
-//release SymbolixDEV
+//Reworked by Talamortis
 #include "ScriptMgr.h"
 #include "Config.h"
 #include <Player.h>
