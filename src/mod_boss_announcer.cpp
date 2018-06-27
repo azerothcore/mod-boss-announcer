@@ -51,7 +51,7 @@ public:
                     IsNormal = "10";
 
                 if (player->GetMap()->IsHeroic())
-                    IsHeroicMode = "|cffff0000Heroic|r";
+                    IsHeroicMode = "|TInterface/TARGETINGFRAME/UI-RaidTargetingIcon_8:20|t|cffff0000Heroic|r";
                 else
                     IsHeroicMode = "|cff00ff00Normal|r";
 
