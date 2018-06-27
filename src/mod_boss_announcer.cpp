@@ -68,7 +68,10 @@ public:
                     if (!player->GetGuild())
                     {
                         if (itr->GetSource()->GetGroup()->IsLeader(itr->GetSource()->GetGUID()))
-                            g_name = itr->GetSource()->GetGuildName();
+                            if (!itr->GetSource()->GetGuild())
+                                g_name = "< No Guild >";
+                            else
+                                g_name = itr->GetSource()->GetGuildName();
                     }
                     else
                         g_name = player->GetGuildName();
