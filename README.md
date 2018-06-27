@@ -5,4 +5,4 @@
 Announce if a world boss killed by someone
 
 # Original script:
-I lost it :(
+Reworked by talamortis Still WIP
