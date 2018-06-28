@@ -7,7 +7,7 @@
 #include "GroupMgr.h"
 #include "InstanceScript.h"
 
-static bool removeAura;
+static bool removeAura, BossAnnouncerEnable, BossAnnounceToPlayerOnLogin;
 
 class Boss_Announcer : public PlayerScript
 {
@@ -16,9 +16,9 @@ public:
 	
     void OnLogin(Player *player)
     {
-        if (sConfigMgr->GetBoolDefault("Boss.Announcer.Enable", true))
+        if (BossAnnouncerEnable)
         {
-            if (sConfigMgr->GetBoolDefault("Boss.Announcer.Announce", true))
+            if (BossAnnounceToPlayerOnLogin)
             {
                 ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00BossAnnouncer |rmodule.");
             }
@@ -27,7 +27,7 @@ public:
 
     void OnCreatureKill(Player* player, Creature* boss)
     {
-        if (sConfigMgr->GetBoolDefault("Boss.Announcer.Enable", true))
+        if (BossAnnouncerEnable)
         {
             if (boss->GetMap()->IsRaid() && boss->getLevel() > 80 && boss->IsDungeonBoss())
             {
@@ -130,6 +130,8 @@ public:
     void  SetInitialWorldSettings()
     {
         removeAura = sConfigMgr->GetBoolDefault("Boss.Announcer.RemoveAuraUponKill", false);
+        BossAnnouncerEnable = sConfigMgr->GetBoolDefault("Boss.Announcer.Enable", true);
+        BossAnnounceToPlayerOnLogin = sConfigMgr->GetBoolDefault("Boss.Announcer.Announce", true);
     }
 };
 
