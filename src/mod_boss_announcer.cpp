@@ -6,6 +6,7 @@
 #include "Group.h"
 #include "GroupMgr.h"
 #include "InstanceScript.h"
+#include "boss_announcer.h"
 
 class Boss_Announcer : public PlayerScript
 {
@@ -40,9 +41,12 @@ public:
                 std::string plr_colour = "7bbef7";
                 std::string guild_colour = "00ff00";
                 std::string boss_colour = "ff0000";
-                std:string alive_text = "00ff00";
+                std::string alive_text = "00ff00";
                 uint32 raid_id = player->GetMap()->GetInstanceId();
                 uint32 Alive_players = 0;
+                uint32 Tanks = 0;
+                uint32 Healers = 0;
+                uint32 DPS = 0;
                 Map::PlayerList const & playerlist = map->GetPlayers();
 
                 if (player->GetMap()->Is25ManRaid())
@@ -51,7 +55,7 @@ public:
                     IsNormal = "10";
 
                 if (player->GetMap()->IsHeroic())
-                    IsHeroicMode = "|TInterface/TARGETINGFRAME/UI-RaidTargetingIcon_8:20|t|cffff0000Heroic|r";
+                    IsHeroicMode = "|cffff0000Heroic|r";
                 else
                     IsHeroicMode = "|cff00ff00Normal|r";
 
@@ -65,6 +69,13 @@ public:
                     if (itr->GetSource()->IsAlive())
                         Alive_players++;
 
+                    if (itr->GetSource()->IsHealerTalentSpec())
+                        Healers++;
+                    else if (itr->GetSource()->IsTankTalentSpec())
+                        Tanks++;
+                    else
+                        DPS++;
+
                     if (!player->GetGuild())
                     {
                         if (itr->GetSource()->GetGroup()->IsLeader(itr->GetSource()->GetGUID()))
@@ -77,7 +88,8 @@ public:
                         g_name = player->GetGuildName();
                 }
 
-                stream << "|CFF" << tag_colour << "|r|cff" << plr_colour << " " << p_name << "|r's Guild |cff" << guild_colour << "" << g_name << "|r has slain |CFF" << boss_colour << "[" << boss_name << "]|r with remaining |cff" << alive_text << "" << Alive_players << " /" << IsNormal << "|r players alive on " << IsHeroicMode << " mode";
+                stream << "|CFF" << tag_colour << "|r|cff" << plr_colour << " " << p_name << "|r's Guild |cff" << guild_colour << "" << g_name << "|r has slain |CFF" << boss_colour << "[" << boss_name << "]|r with remaining |cff" << alive_text << "" << Alive_players << " /" << IsNormal << "|r players alive on " << IsHeroicMode << " mode, possible group |cff" << tag_colour << "Tank: " << Tanks  <<"|r |cff" << guild_colour <<
+                    " Healers: "<< Healers << "|r |cff" << boss_colour << " DPS: " << DPS << "|r";
                 sWorld->SendServerMessage(SERVER_MSG_STRING, stream.str().c_str());
 
 
@@ -85,6 +97,8 @@ public:
         }
     }
 };
+
+
 
 class Boss_Announcer_World : public WorldScript
 {
