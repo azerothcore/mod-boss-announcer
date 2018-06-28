@@ -11,3 +11,7 @@ Boss.Announcer.Enable = 1
 # Announce the module when the player logs in?
 
 Boss.Announcer.Announce = 1
+
+# Remove Aura such as bloodlust debuff upon boss kill?
+
+Boss.Announcer.RemoveAuraUponKill = 0

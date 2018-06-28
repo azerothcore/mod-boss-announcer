@@ -6,7 +6,8 @@
 #include "Group.h"
 #include "GroupMgr.h"
 #include "InstanceScript.h"
-#include "boss_announcer.h"
+
+static bool removeAura;
 
 class Boss_Announcer : public PlayerScript
 {
@@ -76,6 +77,14 @@ public:
                     else
                         DPS++;
 
+                    if (removeAura == true)
+                    {
+                        uint32 buff = itr->GetSource()->GetTeamId() == TEAM_ALLIANCE ? 57723 : 57724;
+
+                        if (itr->GetSource()->HasAura(buff))
+                            itr->GetSource()->RemoveAura(buff);
+                    }
+
                     if (!player->GetGuild())
                     {
                         if (itr->GetSource()->GetGroup()->IsLeader(itr->GetSource()->GetGUID()))
@@ -98,8 +107,6 @@ public:
     }
 };
 
-
-
 class Boss_Announcer_World : public WorldScript
 {
 public:
@@ -117,8 +124,13 @@ public:
 			sConfigMgr->LoadMore(cfg_def_file.c_str());
 
 			sConfigMgr->LoadMore(cfg_file.c_str());
+            SetInitialWorldSettings();
 		}
 	}
+    void  SetInitialWorldSettings()
+    {
+        removeAura = sConfigMgr->GetBoolDefault("Boss.Announcer.RemoveAuraUponKill", false);
+    }
 };
 
 void AddBoss_AnnouncerScripts()
