@@ -1,4 +1,4 @@
-﻿//by SymbolixDEV
+//by SymbolixDEV
 //Reworked by Talamortis
 #include "ScriptMgr.h"
 #include "Config.h"
@@ -33,7 +33,7 @@ public:
             {
                 //lets get the info we want
                 Map* map = player->GetMap();
-                std::string p_name = player->GetGroup()->GetLeaderName();
+                std::string p_name;
                 std::string g_name;
                 std::string boss_name = boss->GetName();
                 std::string IsHeroicMode;
@@ -43,12 +43,16 @@ public:
                 std::string guild_colour = "00ff00";
                 std::string boss_colour = "ff0000";
                 std::string alive_text = "00ff00";
-                uint32 raid_id = player->GetMap()->GetInstanceId();
                 uint32 Alive_players = 0;
                 uint32 Tanks = 0;
                 uint32 Healers = 0;
                 uint32 DPS = 0;
                 Map::PlayerList const & playerlist = map->GetPlayers();
+
+                if (!player->GetGroup())
+                    p_name = player->GetName();
+                else
+                    p_name = player->GetGroup()->GetLeaderName();
 
                 if (player->GetMap()->Is25ManRaid())
                     IsNormal = "25";
