@@ -6,6 +6,7 @@
 #include "Group.h"
 #include "GroupMgr.h"
 #include "InstanceScript.h"
+#include "Chat.h"
 
 static bool removeAura, BossAnnouncerEnable, BossAnnounceToPlayerOnLogin;
 

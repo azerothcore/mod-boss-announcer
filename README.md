@@ -1,4 +1,6 @@
+# ![logo](https://raw.githubusercontent.com/azerothcore/azerothcore.github.io/master/images/logo-github.png) AzerothCore
 ## mod-boss-announcer
+- Latest build status with azerothcore: [![Build Status](https://github.com/azerothcore/mod-boss-announcer/workflows/core-build/badge.svg?branch=master&event=push)](https://github.com/azerothcore/mod-boss-announcer)
 
 # Boss Announcer module for AzerothCore.
 
