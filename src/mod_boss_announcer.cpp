@@ -30,7 +30,7 @@ public:
     {
         if (BossAnnouncerEnable)
         {
-            if (boss->GetMap()->IsRaid() && boss->getLevel() > 80 && boss->IsDungeonBoss())
+            if (boss->GetMap()->IsRaid() && boss->GetLevel() > 80 && boss->IsDungeonBoss())
             {
                 //lets get the info we want
                 Map* map = player->GetMap();
