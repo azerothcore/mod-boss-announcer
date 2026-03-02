@@ -17,7 +17,7 @@ Boss.Announcer.Enable = 1
 #    Boss.Announcer.Announce
 #        Description: Announce to players on login that the server
 #                     is running the Boss Announcer module.
-#        Default:     0 (disabled)
+#        Default:     1 (enabled)
 #
 
 Boss.Announcer.Announce = 1
