@@ -176,6 +176,9 @@ public:
             if (!member)
                 continue;
 
+            if (member->IsGameMaster())
+                continue;
+
             if (member->IsAlive())
                 Alive_players++;
 
